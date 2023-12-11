@@ -2,26 +2,23 @@
 
 namespace App\Events;
 
-use App\Models\User;
-use App\Models\Lesson;
+use App\Models\Comment;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 
-class LessonWatched
+class CommentWrittenEvent
 {
     use Dispatchable, SerializesModels;
 
-    public $lesson;
-    public $user;
+    public $comment;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Lesson $lesson, User $user)
+    public function __construct(Comment $comment)
     {
-        $this->lesson = $lesson;
-        $this->user = $user;
+        $this->comment = $comment;
     }
 }

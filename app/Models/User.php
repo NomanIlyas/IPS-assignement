@@ -79,12 +79,12 @@ class User extends Authenticatable
 
     public function badges()
     {
-        return $this->belongsToMany(Badges::class);
+        return $this->belongsToMany(Badges::class, 'badge_user');
     }
 
     public function unlocked_badges()
     {
-        return $this->belongsToMany(Badges::class)->wherePivot('unlocked', true);
+        return $this->belongsToMany(Badges::class, 'badge_user')->wherePivot('unlocked', true);
     }
 }
 

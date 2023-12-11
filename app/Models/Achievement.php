@@ -16,4 +16,21 @@ class Achievement extends Model
         'type',
         'value'
     ];
+
+    public static function getTypes()
+    {
+        return config('achievements.types');
+    }
+
+    public function getAchievementIdByName($achievement_name)
+    {
+        return
+            self::where('name', '=', $achievement_name)->first()->id;
+    }
+
+    public static function getAchievementByValueAndType($achievement_value, $type)
+    {
+        return
+            self::where(['value' => $achievement_value, 'type' => $type])->first()->name;
+    }
 }
