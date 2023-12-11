@@ -66,5 +66,25 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Lesson::class)->wherePivot('watched', true);
     }
+
+    public function achievements()
+    {
+        return $this->belogsToMany(Achievement::class);
+    }
+
+    public function unlocked_achievements()
+    {
+        return $this->belongsToMany(Achievement::class)->wherePivot('unlocked', true);
+    }
+
+    public function badges()
+    {
+        return $this->belongsToMany(Badges::class);
+    }
+
+    public function unlocked_badges()
+    {
+        return $this->belongsToMany(Badges::class)->wherePivot('unlocked', true);
+    }
 }
 
