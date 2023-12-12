@@ -29,8 +29,7 @@ class UserToAchievementsSeeder extends Seeder
                 UserToAchievements::insert([
                     'user_id' => $user->id,
                     'achievement_id' => $achievement->id,
-                    'unlocked' => false, // Change this to true for unlocked achievements
-//                    'unlocked_on' => now(),
+                    'unlocked' => rand(0, 1) == 1
                 ]);
             }
         }
