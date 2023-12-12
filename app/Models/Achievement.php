@@ -9,8 +9,14 @@ class Achievement extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string
+     */
     protected $table = 'achievements';
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'name',
         'type',

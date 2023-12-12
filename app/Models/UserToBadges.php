@@ -10,10 +10,20 @@ class UserToBadges extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string
+     */
     protected $table = 'badge_user';
+    /**
+     * @var bool
+     */
     public $timestamps = false;
 
-    public static function create($attributes = []): Builder
+    /**
+     * @param array $attributes
+     * @return Builder
+     */
+    public static function create(array $attributes = []): Builder
     {
         return static::query()->create($attributes);
     }

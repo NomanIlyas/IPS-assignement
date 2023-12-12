@@ -15,7 +15,13 @@ class BadgeUnlockedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    /**
+     * @var string
+     */
     public string $badge_name;
+    /**
+     * @var User
+     */
     public User $user;
 
     /**

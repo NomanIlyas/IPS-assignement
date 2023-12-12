@@ -10,7 +10,10 @@ class CommentWrittenEvent
 {
     use Dispatchable, SerializesModels;
 
-    public $comment;
+    /**
+     * @var Comment
+     */
+    public Comment $comment;
 
     /**
      * Create a new event instance.

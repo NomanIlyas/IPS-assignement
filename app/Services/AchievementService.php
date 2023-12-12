@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Collection;
 
 class AchievementService
 {
+    /**
+     * @param User $user
+     * @return array
+     */
     public function getAchievementsAndBadgeData(User $user): array
     {
         $unlockedAchievements = $this->getUnlockedAchievements($user);
@@ -44,11 +48,20 @@ class AchievementService
         ];
     }
 
+    /**
+     * @param User $user
+     * @return Collection
+     */
     public function getUnlockedAchievements(User $user): Collection
     {
         return $user->unlocked_achievements()->get();
     }
 
+    /**
+     * @param $type
+     * @param $currentValue
+     * @return mixed
+     */
     public function getNextAchievementValue($type, $currentValue)
     {
         return Achievement::where('type', $type)
@@ -56,11 +69,23 @@ class AchievementService
             ->min('value');
     }
 
+    /**
+     * @param $value
+     * @param $type
+     * @return mixed
+     */
     public function getAchievementByValueAndType($value, $type)
     {
         return Achievement::where(['value' => $value, 'type' => $type])->first();
     }
 
+    /**
+     * @param $nextValueForLessonWatched
+     * @param $nextValueForCommentWritten
+     * @param $lessonWatchType
+     * @param $commentWrittenType
+     * @return array
+     */
     public function getNextAvailableAchievements(
         $nextValueForLessonWatched,
         $nextValueForCommentWritten,

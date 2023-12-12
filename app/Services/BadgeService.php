@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Collection;
 
 class BadgeService
 {
+    /**
+     * @param User $user
+     * @param int $unlockedAchievementCount
+     * @return array
+     */
     public function getAchievementAndBadgeData(User $user, int $unlockedAchievementCount = 0): array
     {
         $badges = $this->getUnlockedBadges($user);
@@ -36,34 +41,58 @@ class BadgeService
         ];
     }
 
+    /**
+     * @param User $user
+     * @return Collection
+     */
     public function getUnlockedBadges(User $user): Collection
     {
         return $user->unlocked_badges()->get();
     }
 
+    /**
+     * @param $badges
+     * @return mixed
+     */
     public function getCurrentBadge($badges)
     {
         return $badges->last() ? $badges->last()->name :
             Badges::getBadgesByValue(config('badges.constants.BEGINNER'))->name;
     }
 
-    public function getNextBadgeValue($badges)
+    /**
+     * @param $badges
+     * @return mixed
+     */
+    public function getNextBadgeValue($badges): mixed
     {
         return $badges->last() ? $badges->last()->value :
             Badges::getBadgesByValue(config('badges.constants.BEGINNER'))->name;
     }
 
-    public function getNextBadge($nextBadgeValue)
+    /**
+     * @param $nextBadgeValue
+     * @return string|null
+     */
+    public function getNextBadge($nextBadgeValue): ?string
     {
         return Badges::getBadgesByValue($nextBadgeValue)->name;
     }
 
-    public function getRemainingToUnlockNextBadge($nextBadgeValue, $achievementsCount)
+    /**
+     * @param int $nextBadgeValue
+     * @param int $achievementsCount
+     * @return mixed
+     */
+    public function getRemainingToUnlockNextBadge(int $nextBadgeValue, int $achievementsCount): int
     {
         return $nextBadgeValue - $achievementsCount;
     }
 
-    private function getLastBadgeValue()
+    /**
+     * @return mixed
+     */
+    private function getLastBadgeValue(): int
     {
         return Badges::max('value');
     }

@@ -11,8 +11,14 @@ class LessonWatchedEvent
 {
     use Dispatchable, SerializesModels;
 
-    public $lesson;
-    public $user;
+    /**
+     * @var Lesson
+     */
+    public Lesson $lesson;
+    /**
+     * @var User
+     */
+    public User $user;
 
     /**
      * Create a new event instance.

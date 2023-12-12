@@ -6,6 +6,9 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Lesson;
 
+/**
+ *
+ */
 class LessonUserSeeder extends Seeder
 {
     /**

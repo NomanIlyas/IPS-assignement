@@ -13,7 +13,13 @@ class AchievementUnlockedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    /**
+     * @var User
+     */
     public User $user;
+    /**
+     * @var string
+     */
     public string $achievement_name;
 
     /**

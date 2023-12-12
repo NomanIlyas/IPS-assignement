@@ -68,6 +68,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Lesson::class)->wherePivot('watched', true);
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function achievements(): BelongsToMany
     {
         return $this->belongsToMany(
@@ -78,16 +81,25 @@ class User extends Authenticatable
         );
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function unlocked_achievements(): BelongsToMany
     {
         return $this->belongsToMany(Achievement::class)->wherePivot('unlocked', true);
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function badges(): BelongsToMany
     {
         return $this->belongsToMany(Badges::class, 'badge_user');
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function unlocked_badges(): BelongsToMany
     {
         return $this->belongsToMany(Badges::class, 'badge_user')->wherePivot('unlocked', true);

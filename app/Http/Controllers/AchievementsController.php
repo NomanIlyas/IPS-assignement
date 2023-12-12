@@ -9,15 +9,29 @@ use Illuminate\Http\JsonResponse;
 
 class AchievementsController extends Controller
 {
+    /**
+     * @var AchievementService
+     */
     protected AchievementService $achievementService;
+    /**
+     * @var BadgeService
+     */
     protected BadgeService $badgeService;
 
+    /**
+     * @param AchievementService $achievementService
+     * @param BadgeService $badgeService
+     */
     public function __construct(AchievementService $achievementService, BadgeService $badgeService)
     {
         $this->achievementService = $achievementService;
         $this->badgeService = $badgeService;
     }
 
+    /**
+     * @param User $user
+     * @return JsonResponse
+     */
     public function index(User $user): JsonResponse
     {
         $achievementData = $this->achievementService->getAchievementsAndBadgeData($user);
