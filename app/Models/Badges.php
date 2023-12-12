@@ -21,10 +21,6 @@ class Badges extends Model
         return $this->belongsToMany(User::class, 'badge_user'); // Use 'badge_user' as the pivot table name
     }
 
-    public static function getBadgeIdByName($badge_name) {
-        return self::where('name', "=", $badge_name)->first('id');
-    }
-
     public static function getBadgesByValue($badge_value) {
         return self::where('value', '=', $badge_value)->first();
     }
