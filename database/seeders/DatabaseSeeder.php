@@ -12,13 +12,16 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Commitment is everything :)
-
         // Order of execution
+
+        // Execute essential seeders first
+        $this->call(AchievementsSeeder::class);
+        $this->call(BadgesSeeder::class);
+
+        // Optional seeder
         $this->call(UserSeeder::class);
         $this->call(LessonSeeder::class);
         $this->call(CommentSeeder::class);
-        $this->call(AchievementsSeeder::class);
-        $this->call(BadgesSeeder::class);
 
         /*
          * These seeder for self testing purpose and these entities are interlink with each other
