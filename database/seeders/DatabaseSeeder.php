@@ -12,21 +12,20 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Commitment is everything :)
-        // Order of execution
 
+        // Order of execution
         $this->call(UserSeeder::class);
         $this->call(LessonSeeder::class);
         $this->call(CommentSeeder::class);
         $this->call(AchievementsSeeder::class);
         $this->call(BadgesSeeder::class);
 
-        // Seed user-badge relationships after both are seeded
-        $this->call(UserToBadgeSeeder::class);
-
-        // Seed user-achievement relationships after both are seeded
-        $this->call(UserToAchievementsSeeder::class);
-
-        // Seed lesson-user relationships after both are seeded
-        $this->call(LessonUserSeeder::class);
+        /*
+         * These seeder for self testing purpose and these entities are interlink with each other
+         *  like if you add more achievements and according to achievements number badges also update
+         */
+//        $this->call(UserToBadgeSeeder::class);
+//        $this->call(UserToAchievementsSeeder::class);
+//        $this->call(LessonUserSeeder::class);
     }
 }
