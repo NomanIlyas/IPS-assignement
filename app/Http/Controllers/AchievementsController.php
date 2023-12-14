@@ -34,16 +34,19 @@ class AchievementsController extends Controller
      */
     public function index(User $user): JsonResponse
     {
-        $achievementData = $this->achievementService->getAchievementsAndBadgeData($user);
+        $data = $this->achievementService->getAchievementsAndBadgeData($user);
 
-        $data = $this->badgeService->getAchievementAndBadgeData(
-            $user,
-            count($achievementData['unlocked_achievements'])
+        $data = array_merge(
+            $data,
+            $this->badgeService->getAchievementAndBadgeData(
+                $user,
+                count($data['unlocked_achievements'])
+            )
         );
 
         return response()->json([
-            'unlocked_achievements' => $achievementData['unlocked_achievements'],
-            'next_available_achievements' => $achievementData['next_available_achievements'],
+            'unlocked_achievements' => $data['unlocked_achievements'],
+            'next_available_achievements' => $data['next_available_achievements'],
             'current_badge' => $data['currentBadge'],
             'next_badge' => $data['nextBadge'],
             'remaining_to_unlock_next_badge' => $data['remainingToUnlockNextBadge']
