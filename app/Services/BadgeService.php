@@ -3,8 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
-use App\Models\Badges;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\Badge;
 
 class BadgeService
 {
@@ -13,19 +12,21 @@ class BadgeService
      * @param int $unlockedAchievementCount
      * @return array
      */
-    public function getAchievementAndBadgeData(User $user, int $unlockedAchievementCount = 0): array
-    {
-        $badges = $this->getUnlockedBadges($user);
+    public function getAchievementAndBadgeData(
+        User $user,
+        int $unlockedAchievementCount = 0
+    ): array {
+        $badges = $user->badges()->get();
         $currentBadge = $this->getCurrentBadge($badges);
         $badgeValue = $this->getNextBadgeValue($badges);
         $lastBadgeValue = $this->getLastBadgeValue();
 
-        // Here is termination conditions for Badges
+        // Here is termination conditions for Badge
         if ($lastBadgeValue == $badgeValue) {
             $nextBadgeValue = $lastBadgeValue;
             $nextBadge = '';
         } else {
-            $nextBadgeValue = Badges::where('value', '>', $badgeValue)->min('value');
+            $nextBadgeValue = Badge::where('value', '>', $badgeValue)->min('value');
             $nextBadge = $this->getNextBadge($nextBadgeValue);
         }
 
@@ -42,22 +43,13 @@ class BadgeService
     }
 
     /**
-     * @param User $user
-     * @return Collection
-     */
-    public function getUnlockedBadges(User $user): Collection
-    {
-        return $user->unlocked_badges()->get();
-    }
-
-    /**
      * @param $badges
      * @return mixed
      */
-    public function getCurrentBadge($badges)
+    public function getCurrentBadge($badges): mixed
     {
         return $badges->last() ? $badges->last()->name :
-            Badges::getBadgesByValue(config('badges.constants.BEGINNER'))->name;
+            Badge::getBadgesByValue(config('badges.constants.BEGINNER'))->name;
     }
 
     /**
@@ -67,7 +59,7 @@ class BadgeService
     public function getNextBadgeValue($badges): mixed
     {
         return $badges->last() ? $badges->last()->value :
-            Badges::getBadgesByValue(config('badges.constants.BEGINNER'))->name;
+            Badge::getBadgesByValue(config('badges.constants.BEGINNER'))->name;
     }
 
     /**
@@ -76,7 +68,7 @@ class BadgeService
      */
     public function getNextBadge($nextBadgeValue): ?string
     {
-        return Badges::getBadgesByValue($nextBadgeValue)->name;
+        return Badge::getBadgesByValue($nextBadgeValue)->name;
     }
 
     /**
@@ -94,6 +86,6 @@ class BadgeService
      */
     private function getLastBadgeValue(): int
     {
-        return Badges::max('value');
+        return Badge::max('value');
     }
 }

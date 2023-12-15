@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('badge_user', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('badges_id')->constrained();
-            $table->boolean('unlocked')->default(false);
+            $table->foreignId('badge_id')->constrained('badge');
+            $table->timestamps();
+            $table->unique(['user_id', 'badge_id']);
         });
     }
 

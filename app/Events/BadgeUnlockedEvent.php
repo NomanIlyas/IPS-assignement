@@ -16,22 +16,9 @@ class BadgeUnlockedEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * @var string
-     */
-    public string $badge_name;
-    /**
-     * @var User
-     */
-    public User $user;
-
-    /**
      * Create a new event instance.
      */
-    public function __construct(string $badge_name, User $user)
-    {
-        $this->badge_name = $badge_name;
-        $this->user = $user;
-    }
+    public function __construct(public string $badge_name, public User $user){}
 
     /**
      * Get the channels the event should broadcast on.

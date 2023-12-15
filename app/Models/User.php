@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -47,7 +48,7 @@ class User extends Authenticatable
     /**
      * The comments that belong to the user.
      */
-    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
     }
@@ -61,32 +62,11 @@ class User extends Authenticatable
     }
 
     /**
-     * The lessons that a user has watched.
-     */
-    public function watched()
-    {
-        return $this->belongsToMany(Lesson::class)->wherePivot('watched', true);
-    }
-
-    /**
      * @return BelongsToMany
      */
     public function achievements(): BelongsToMany
     {
-        return $this->belongsToMany(
-            Achievement::class,
-            'achievement_user',
-            'user_id',
-            'achievement_id'
-        );
-    }
-
-    /**
-     * @return BelongsToMany
-     */
-    public function unlocked_achievements(): BelongsToMany
-    {
-        return $this->belongsToMany(Achievement::class)->wherePivot('unlocked', true);
+        return $this->belongsToMany(Achievement::class);
     }
 
     /**
@@ -94,15 +74,7 @@ class User extends Authenticatable
      */
     public function badges(): BelongsToMany
     {
-        return $this->belongsToMany(Badges::class, 'badge_user');
-    }
-
-    /**
-     * @return BelongsToMany
-     */
-    public function unlocked_badges(): BelongsToMany
-    {
-        return $this->belongsToMany(Badges::class, 'badge_user')->wherePivot('unlocked', true);
+        return $this->belongsToMany(Badge::class);
     }
 }
 

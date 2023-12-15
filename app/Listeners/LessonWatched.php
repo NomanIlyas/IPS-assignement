@@ -6,7 +6,7 @@ use App\Events\AchievementUnlockedEvent;
 use App\Events\BadgeUnlockedEvent;
 use App\Events\LessonWatchedEvent;
 use App\Models\Achievement;
-use App\Models\Badges;
+use App\Models\Badge;
 
 class LessonWatched
 {
@@ -44,7 +44,7 @@ class LessonWatched
 
         if(in_array($achievements_count, config('badges.constants.BADGES_WON'))) {
 
-            $badge_name = Badges::where('value', '=', $achievements_count)->first('name');
+            $badge_name = Badge::where('value', '=', $achievements_count)->first('name');
 
             // dispatch the event
             BadgeUnlockedEvent::dispatch(

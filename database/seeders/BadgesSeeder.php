@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Config;
-use App\Models\Badges;
+use App\Models\Badge;
 
 class BadgesSeeder extends Seeder
 {
@@ -21,7 +21,7 @@ class BadgesSeeder extends Seeder
         unset($badgeConstants['BADGES_WON']);
 
         foreach ($badgeConstants as $name => $value) {
-            Badges::create([
+            Badge::create([
                 'name' => $name,
                 'value' => $value,
             ]);

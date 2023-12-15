@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\Badges;
+use App\Models\Badge;
 
-class UserToBadgeSeeder extends Seeder
+class UnlockBadgeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,7 +17,7 @@ class UserToBadgeSeeder extends Seeder
     {
         // Generate random user and badge IDs
         $users = User::all();
-        $badges = Badges::all();
+        $badges = Badge::all();
 
         for ($i = 0; $i < 10; $i++) { // Generate 10 sample entries
             $user = $users->random();

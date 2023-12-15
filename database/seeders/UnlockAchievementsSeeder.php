@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Achievement;
 use App\Models\UserToAchievements;
 
-class UserToAchievementsSeeder extends Seeder
+class UnlockAchievementsSeeder extends Seeder
 {
     /**
      * Run the database seeds.

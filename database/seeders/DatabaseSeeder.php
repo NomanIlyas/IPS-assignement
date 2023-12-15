@@ -27,8 +27,8 @@ class DatabaseSeeder extends Seeder
          * These seeder for self testing purpose and these entities are interlink with each other
          *  like if you add more achievements and according to achievements number badges also update
          */
-//        $this->call(UserToBadgeSeeder::class);
-//        $this->call(UserToAchievementsSeeder::class);
+//        $this->call(UnlockBadgeSeeder::class);
+//        $this->call(UnlockAchievementsSeeder::class);
 //        $this->call(LessonUserSeeder::class);
     }
 }

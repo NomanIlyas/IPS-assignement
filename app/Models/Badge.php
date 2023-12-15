@@ -4,16 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Badges extends Model
+class Badge extends Model
 {
     use HasFactory;
 
     /**
      * @var string
      */
-    protected $table = 'badges';
+    protected $table = 'badge';
 
     /**
      * @var string[]
@@ -22,14 +21,6 @@ class Badges extends Model
         'name',
         'value'
     ];
-
-    /**
-     * @return BelongsToMany
-     */
-    public function users()
-    {
-        return $this->belongsToMany(User::class, 'badge_user');
-    }
 
     /**
      * @param $badge_value

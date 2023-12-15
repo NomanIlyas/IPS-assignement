@@ -10,23 +10,13 @@ use Illuminate\Http\JsonResponse;
 class AchievementsController extends Controller
 {
     /**
-     * @var AchievementService
-     */
-    protected AchievementService $achievementService;
-    /**
-     * @var BadgeService
-     */
-    protected BadgeService $badgeService;
-
-    /**
      * @param AchievementService $achievementService
      * @param BadgeService $badgeService
      */
-    public function __construct(AchievementService $achievementService, BadgeService $badgeService)
-    {
-        $this->achievementService = $achievementService;
-        $this->badgeService = $badgeService;
-    }
+    public function __construct(
+        public AchievementService $achievementService,
+        public BadgeService $badgeService
+    ) {}
 
     /**
      * @param User $user

@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\Achievement;
-use Illuminate\Database\Eloquent\Collection;
 
 class AchievementService
 {
@@ -14,20 +13,21 @@ class AchievementService
      */
     public function getAchievementsAndBadgeData(User $user): array
     {
-        $unlockedAchievements = $this->getUnlockedAchievements($user);
+        $unlockedAchievements = $user->achievements()->get();
 
         $currentValueForLessonWatched = $user->achievements()
             ->where('type', config('achievements.constants.LESSON_WATCHED'))
-            ->latest('id')
+            ->orderByDesc('value')
             ->first();
 
         $nextValueForLessonWatched = $this->getNextAchievementValue(
             config('achievements.constants.LESSON_WATCHED'),
-            $currentValueForLessonWatched);
+            $currentValueForLessonWatched
+        );
 
         $currentValueForCommentWritten = $user->achievements()
             ->where('type', config('achievements.constants.COMMENT_WRITTEN'))
-            ->latest('id')
+            ->orderByDesc('value')
             ->first();
 
         $nextValueForCommentWritten = $this->getNextAchievementValue(
@@ -49,20 +49,11 @@ class AchievementService
     }
 
     /**
-     * @param User $user
-     * @return Collection
-     */
-    public function getUnlockedAchievements(User $user): Collection
-    {
-        return $user->unlocked_achievements()->get();
-    }
-
-    /**
      * @param $type
      * @param $currentValue
      * @return mixed
      */
-    public function getNextAchievementValue($type, $currentValue)
+    public function getNextAchievementValue($type, $currentValue): mixed
     {
         return Achievement::where('type', $type)
             ->where('value', '>', $currentValue ? $currentValue->value : 0)
@@ -74,7 +65,7 @@ class AchievementService
      * @param $type
      * @return mixed
      */
-    public function getAchievementByValueAndType($value, $type)
+    public function getAchievementByValueAndType($value, $type): mixed
     {
         return Achievement::where(['value' => $value, 'type' => $type])->first();
     }

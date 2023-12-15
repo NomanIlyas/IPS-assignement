@@ -5,8 +5,7 @@ namespace App\Listeners;
 use App\Events\BadgeUnlockedEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use App\Models\UserToBadges;
-use App\Models\Badges;
+use App\Models\Badge;
 use Illuminate\Support\Facades\Log;
 
 class BadgeUnlocked
@@ -24,17 +23,11 @@ class BadgeUnlocked
      */
     public function handle(BadgeUnlockedEvent $event): void
     {
-        $user_id = $event->user->id;
-        $badge_id = Badges::where('name', '=', $event->badge_name)->first()->id;
+        $badge = Badge::where('name', '=', $event->badge_name)->first();
 
-        if ($badge_id) {
-            UserToBadges::create([
-                'user_id' => $user_id,
-                'badges_id' => $badge_id,
-                'unlocked' => true,
-            ]);
+        if ($badge instanceof Badge) {
+            $event->user->badges()->attach($badge);
         } else {
-            // Handle error scenario (missing badge)
             Log::error("Badge with name {$event->badge_name} not found.");
         }
     }

@@ -14,22 +14,9 @@ class AchievementUnlockedEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * @var User
-     */
-    public User $user;
-    /**
-     * @var string
-     */
-    public string $achievement_name;
-
-    /**
      * Create a new event instance.
      */
-    public function __construct(string $achievement_name, User $user)
-    {
-        $this->achievement_name = $achievement_name;
-        $this->user = $user;
-    }
+    public function __construct(public string $achievement_name, public User $user){}
 
     /**
      * Get the channels the event should broadcast on.
