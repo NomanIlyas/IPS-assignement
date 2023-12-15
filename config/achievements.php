@@ -21,8 +21,8 @@ return [
         'TWENTY_FIVE_LESSONS_WATCHED' => 25,
         'FIFTY_LESSONS_WATCHED' => 50,
         // Comment & Lessons Series
-        'COMMENTS_WRITTEN' => [1, 5, 10, 25, 50],
-        'LESSONS_WATCHED' => [1, 3, 5, 10, 20],
+        'COMMENT_WRITTEN_SERIES' => [1, 3, 5, 10, 20],
+        'LESSON_WATCHED_SERIES' => [1, 5, 10, 25, 50],
     ],
     'achievements' => [
         // **Comments Written**

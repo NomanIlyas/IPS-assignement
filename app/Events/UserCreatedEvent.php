@@ -2,12 +2,11 @@
 
 namespace App\Events;
 
-use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 
-class CommentWrittenEvent
+class UserCreatedEvent
 {
     use Dispatchable, SerializesModels;
 
@@ -16,5 +15,5 @@ class CommentWrittenEvent
      *
      * @return void
      */
-    public function __construct(public Comment $comment, public User $user){}
+    public function __construct(public User $user){}
 }

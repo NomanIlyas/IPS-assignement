@@ -11,14 +11,6 @@ use Illuminate\Support\Facades\Log;
 class BadgeUnlocked
 {
     /**
-     * Create the event listener.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Handle the event.
      */
     public function handle(BadgeUnlockedEvent $event): void

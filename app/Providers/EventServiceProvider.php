@@ -6,10 +6,12 @@ use App\Events\AchievementUnlockedEvent;
 use App\Events\BadgeUnlockedEvent;
 use App\Events\CommentWrittenEvent;
 use App\Events\LessonWatchedEvent;
+use App\Events\UserCreatedEvent;
 use App\Listeners\AchievementUnlocked;
 use App\Listeners\BadgeUnlocked;
 use App\Listeners\CommentWritten;
 use App\Listeners\LessonWatched;
+use App\Listeners\UserCreated;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -51,6 +53,11 @@ class EventServiceProvider extends ServiceProvider
         Event::listen(
             BadgeUnlockedEvent::class,
             BadgeUnlocked::class,
+        );
+
+        Event::listen(
+            UserCreatedEvent::class,
+            UserCreated::class,
         );
     }
 
